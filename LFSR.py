@@ -27,8 +27,7 @@ def generate(field : ffield.FField, n, x, y):
     for i in range(n):
         inner_product = 0
         powers_of_x_coefficients = field.ShowCoefficients(powers_of_x[i])
-        for j in range(m):
-            #inner_product = field.Add(inner_product, field.Multiply(powers_of_x_coefficients[j], y_coefficients[-j - 1]))
+        for j in range(m + 1): # m + 1 because ffield adds one more index to the length of the coefficients
             inner_product = field.Add(inner_product, field.Multiply(powers_of_x_coefficients[j], y_coefficients[j]))
         r.append(inner_product)
 
@@ -42,100 +41,85 @@ y = int(input(f"Enter seed y as integer between 0 and 2^{m}-1 ({2**m - 1}): "))
 
 print(f"Sequence:\n{generate(field, n, x, y)}")
 
-field = ffield.FField(4)
-n = 8
-x = 13
-y = 4
-print(generate(field, n, x, y))
+def generate_sequences_by_all_possible_seeds(seed_size):
+    field = ffield.FField(seed_size)
+    results = []
+    highest = 2**seed_size
+    for x in range(highest):
+        for y in range(highest):
+            result = generate(field, n, x, y)
+            num = int("".join(str(i) for i in result), 2)
+            results.append(num)
+    
+    return results
 
-# # Define the finite field
-# field = ffield.FField(19)
+def count_occurences(results):
+    # Count how many times each number appears
+    counts = {}
+    for result in results:
+        if result in counts:
+            counts[result] += 1
+        else:
+            counts[result] = 1
 
-# # Example usage:
-# n = 10000
-# x_seeds = []
-# y_seeds = []
-# with open("TestSuite/Sequences/trulyRandomSeedsLen=19", "r") as f:
-#     for i in range(10000):
-#         x_seeds.append(int(f.readline().strip()))
-#         y_seeds.append(int(f.readline().strip()))
+    return counts
 
-# start_time = time.time()
-# results = []
-# for i in range(10000):
-#     results.append(generate_num(field, n, x_seeds[i], y_seeds[i]))
-#     print(i)
+def generate_plot_n8_m4():
+    # Generate all possible combinations of x and y 
+    field = ffield.FField(4)
+    n = 8
 
-# end_time = time.time()
+    results = generate_sequences_by_all_possible_seeds(4)
+    counts = count_occurences(results)
 
-# with open("TestSuite/Sequences/lfsrSequenceN=10000M=19.txt", "w") as f:
-#     for i in results:
-#         f.write(str(i).replace("[", "").replace("]", "").replace(",", "").replace(" ", ""))
-#         f.write("\n")
+    # Plot the counts of each number and label the axis and title
+    plt.figure(figsize=(16, 6))  # Increase the figure width
+    plt.bar(counts.keys(), counts.values(), color='royalblue', width=0.5)  # Change the color and width of the bars
 
-# print(f"Time to generate all possible combinations of x and y: {end_time - start_time} seconds")
+    plt.grid(axis='y', linestyle='--', alpha=0.7)  # Add horizontal gridlines with reduced opacity
+    plt.xlabel("Number", fontsize=14)
+    plt.ylabel("Count", fontsize=14)
+    plt.title(f"Count of each number for n={n}, epsilon=0.5", fontsize=16)
 
+    plt.xticks(fontsize=12)  # Increase the font size of the x-axis ticks
+    plt.yticks(fontsize=12)  # Increase the font size of the y-axis ticks
 
-# Generate all possible combinations of x and y 
-field = ffield.FField(4)
-n = 8
+    plt.xlim(-10, 260)  # Set the limits of the x-axis
+    plt.ylim(0, 80)  # Set the limits of the y-axis
 
-results = []
-for x in range(16):
-    for y in range(16):
-        result = generate(field, n, x, y)
-        num = int("".join(str(i) for i in result), 2)
-        results.append(num)
+    plt.show()
 
-# Count how many times each number appears where we convert the bitstrings to ints
-counts = {}
-for result in results:
-    if result in counts:
-        counts[result] += 1
-    else:
-        counts[result] = 1
+def generate_plot_n12_m8():
+    # Generate all possible combinations of x and y 
+    field = ffield.FField(8)
+    n = 12
 
-# Print the largest and smallest counts
-print("Largest counts:")
+    results = generate_sequences_by_all_possible_seeds(8)
+    counts = count_occurences(results)
 
-#for key, value in sorted(counts.items(), key=lambda item: item[1], reverse=True)[:10]:
-#    print(f"{key}: {value}")
-#    print(f"{key}, {counts[key]}")
-#print("Smallest counts:")
-#for key, value in sorted(counts.items(), key=lambda item: item[1])[:10]:
-#    print(f"{key}: {value}")
-#    print(f"{key}, {counts[key]}")
+    # Plot the counts of each number and label the axis and title
+    plt.figure(figsize=(16, 6))  # Increase the figure width
+    plt.bar(counts.keys(), counts.values(), color='royalblue', width=0.5)  # Change the color and width of the bars
+
+    plt.grid(axis='y', linestyle='--', alpha=0.7)  # Add horizontal gridlines with reduced opacity
+    plt.xlabel("Number", fontsize=14)
+    plt.ylabel("Count", fontsize=14)
+    plt.title(f"Count of each number for n={n}, epsilon=0.5", fontsize=16)
+
+    plt.xticks(fontsize=12)  # Increase the font size of the x-axis ticks
+    plt.yticks(fontsize=12)  # Increase the font size of the y-axis ticks
+
+    plt.xlim(-10, 260)  # Set the limits of the x-axis
+    plt.ylim(0, 80)  # Set the limits of the y-axis
+
+    plt.show()
 
 
-# Plot the counts of each number and label the axis and title
-plt.figure(figsize=(16, 6))  # Increase the figure width
-plt.bar(counts.keys(), counts.values(), color='royalblue', width=0.5)  # Change the color and width of the bars
+want_to_plot = input("Do you want to plot with n = 8 and m = 4? (y/N): ")
+if want_to_plot == "y":
+    generate_plot_n8_m4()
 
-plt.grid(axis='y', linestyle='--', alpha=0.7)  # Add horizontal gridlines with reduced opacity
-plt.xlabel("Number", fontsize=14)
-plt.ylabel("Count", fontsize=14)
-plt.title(f"Count of each number for n={n}, epsilon=0.5", fontsize=16)
+want_to_plot = input("Do you want to plot with n = 12 and m = 8? (y/N): ")
+if want_to_plot == "y":
+    generate_plot_n12_m8()
 
-plt.xticks(fontsize=12)  # Increase the font size of the x-axis ticks
-plt.yticks(fontsize=12)  # Increase the font size of the y-axis ticks
-
-plt.xlim(-10, 260)  # Set the limits of the x-axis
-plt.ylim(0, 80)  # Set the limits of the y-axis
-
-plt.show()
-
-# Calculate the probability of each number
-total = sum(counts.values())
-probabilities = {}
-for key, value in counts.items():
-    probabilities[key] = value / total
-
-# Print the largets and smallest probabilities
-print("Largest probabilities:")
-for key, value in sorted(probabilities.items(), key=lambda item: item[1], reverse=True)[:1]:
-    print(f"{key}: {value}")
-    print(f"{key}, {counts[key]}")
-print("Smallest probabilities:")
-for key, value in sorted(probabilities.items(), key=lambda item: item[1])[:1]:
-    print(f"{key}: {value}")
-    print(f"{key}, {counts[key]}")

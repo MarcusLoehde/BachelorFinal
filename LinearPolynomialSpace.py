@@ -50,14 +50,33 @@ field = ffield.FField(n)
 bit_sequence = generate_bit_sequence(a, b, field)
 print(f"Bit sequence:\n{bit_sequence}")
 
+def generate_plot():
+    # Generate a plot of the outputs by iterating x
 
-def binary_to_decimal(binary_array):
-    # Convert the binary array into a string
-    binary_string = ''.join(str(bit) for bit in binary_array)
-    # Convert the binary string into a decimal integer
-    decimal_int = int(binary_string, 2)
-    return decimal_int
+    def binary_to_integer(binary_array):
+        # Convert the binary array into a string
+        binary_string = ''.join(str(bit) for bit in binary_array)
+        # Convert the binary string into a decimal integer
+        decimal_int = int(binary_string, 2)
+        return decimal_int
 
+    a = 27
+    b = 86
+    field = ffield.FField(8)
 
+    results = {}
+    for x in range(0, 2**field.n-1):
+        results[x] = binary_to_integer(generate(a, b, field, x))
 
+    plt.plot(results.keys(), results.values(), 'bo')
+    plt.grid(True)
+    plt.xlim(0, 256)  # Set the limits of the x-axis
+    plt.ylim(0, 256)  # Set the limits of the y-axis
+    plt.title(f"All possible outputs with a={a}, b={b}")
+    plt.xlabel("Value of x")
+    plt.ylabel("Output of generator")
+    plt.show()
 
+want_to_plot = input("Do you want to plot? (y/N): ")
+if want_to_plot == 'y':
+    generate_plot()

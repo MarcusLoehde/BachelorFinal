@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def generate(a, b, p, x):
     """
     Generates an integer using the formula:
@@ -42,3 +44,25 @@ b = int(input("Enter another seed: "))
 p = int(input("Enter a prime number: "))
 
 print(f"Bit sequence:\n{generate_bit_sequence(a, b, p)}")
+
+def generate_plot():
+    # Generate a plot of the outputs by iterating x
+    a = 67
+    b = 34
+    p = 71
+    results = {}
+    for x in range(0, p-1):
+       results[x] = generate(a, b, p, x)
+
+    plt.plot(results.keys(), results.values(), 'ro')
+    plt.title("All possible outputs with a=67, b=34")
+    plt.xlabel("Value of x")
+    plt.ylabel("Output of generator")
+
+    plt.axis([0, p, 0, p])
+
+    plt.show()
+
+want_to_see_plot = input("Do you want to plot? (y/N): ")
+if want_to_see_plot == "y":
+    generate_plot()
