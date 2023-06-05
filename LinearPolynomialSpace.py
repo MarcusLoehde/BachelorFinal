@@ -32,7 +32,8 @@ def generate_bit_sequence(a, b, field):
     field : FField
         A finite field
     Returns:
-        result : list[list]
+    result : list[list]
+        A list of all possible pseudo-random sequences
     """
     result = []
     for i in range(2**field.n):

@@ -14,7 +14,8 @@ def generate(a, b, p, x):
     x : int 
         The constant value in [0, p-1]
     Returns:
-        result : int 
+    result : int 
+        A pseudo-random integer
     """
     result = (a * x + b) % p
     return result
@@ -32,7 +33,8 @@ def generate_bit_sequence(a, b, p):
     p : int
         A prime number
     Returns:
-        sequence : list
+    sequence : list
+        A pseudo-random list of 0s and 1s
     """
     sequence = []
     for i in range(p):
