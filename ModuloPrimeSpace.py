@@ -48,6 +48,9 @@ p = int(input("Enter a prime number: "))
 print(f"Bit sequence:\n{generate_bit_sequence(a, b, p)}")
 
 def generate_plot():
+    """
+    Generates a plot of the outputs by iterating x.
+    """
     # Generate a plot of the outputs by iterating x
     a = 67
     b = 34
