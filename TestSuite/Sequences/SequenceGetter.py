@@ -35,3 +35,12 @@ def getLFSRSequence_N10000_M19():
             sequences.append(line.replace("\n", "").replace("\t", ""))
         return sequences
     
+def getTrulyRandomSeed_101():
+    with open ("TestSuite/Sequences/true_random_seeds_101.txt", "r") as f:
+        true_random_sequence_seeds = [int(line) for line in f]
+        return true_random_sequence_seeds
+
+def getTrulyRandomBits():
+    with open ("TestSuite/Sequences/true_random.txt", "r") as f:
+        true_random_sequence_bits = [int(line) for line in f]
+        return true_random_sequence_bits
