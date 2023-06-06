@@ -67,3 +67,14 @@ for sequence in lfsr_sequence:
 print("Frequency test for LFSR sequences with N = 10000 and M = 19:")
 print(f"Amount of sequences that pass the test: {sum(results)}")
 print()
+
+# Test the LFSR sequences with n = 10000 and m = 29
+lfsr_sequence = sg.getLFSRSequence_N10000_M29()
+results = []
+for sequence in lfsr_sequence:
+    p_value = frequency(sequence)
+    results.append(p_value >= 0.01)
+
+print("Frequency test for LFSR sequences with N = 10000 and M = 29:")
+print(f"Amount of sequences that pass the test: {sum(results)}")
+print()

@@ -95,6 +95,17 @@ for m in results:
     print(f"M = {m}: {sum(results[m])}")
 print()
 
-
-
-
+# Test the LFSR sequences with N = 10000 and M = 29
+lfsr_sequence = sg.getLFSRSequence_N10000_M29()
+results = {}
+for sequence in lfsr_sequence:
+    for m in range(200, 1001, 100):
+        P_value = block_frequency_test(sequence, m)
+        if m not in results:
+            results[m] = []
+        results[m].append(P_value >= 0.01)
+    
+print("Block frequency test for LFSR sequences with N = 10000 and M = 29:")
+for m in results:
+    print(f"M = {m}: {sum(results[m])}")
+print()
