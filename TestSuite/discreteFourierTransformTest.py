@@ -33,48 +33,37 @@ def discrete_fourier_transform_test(sequence):
     return p_value
 
 # Test the modulo prime space sequences
-# modulo_prime_sequence = sg.getModuloPrimeSpaceSequences()
-# result = []
-# for sequence in modulo_prime_sequence:
-#     p_value = discrete_fourier_transform_test(sequence)
-#     result.append(p_value >= 0.01)
+modulo_prime_sequence = sg.getModuloPrimeSpaceSequences()
+result = []
+for sequence in modulo_prime_sequence:
+    p_value = discrete_fourier_transform_test(sequence)
+    result.append(p_value >= 0.01)
 
-# print("Discrete Fourier Transform test for modulo prime space sequences:")
-# print(f"Amount of passed tests: {sum(result)}")
-# print()
+print("Discrete Fourier Transform test for modulo prime space sequences:")
+print(f"Amount of passed tests: {sum(result)}")
+print()
 
-# # Test the linear polynomial space sequences
-# linear_polynomial_sequence = sg.getLinearPolynomialSpaceSequences()
-# result = []
-# for sequence in linear_polynomial_sequence:
-#     p_value = discrete_fourier_transform_test(sequence)
-#     result.append(p_value >= 0.01)
+# Test the linear polynomial space sequences
+linear_polynomial_sequence = sg.getLinearPolynomialSpaceSequences()
+result = []
+for sequence in linear_polynomial_sequence:
+    p_value = discrete_fourier_transform_test(sequence)
+    result.append(p_value >= 0.01)
 
-# print("Discrete Fourier Transform test for linear polynomial space sequences:")
-# print(f"Amount of passed tests: {sum(result)}")
-# print()
+print("Discrete Fourier Transform test for linear polynomial space sequences:")
+print(f"Amount of passed tests: {sum(result)}")
+print()
 
-# # Test the LFSR sequences with N=10000 and M=14
-# lfsr_sequence = sg.getLFSRSequence_N10000_M14()
-# result = []
-# for sequence in lfsr_sequence:
-#     p_value = discrete_fourier_transform_test(sequence)
-#     result.append(p_value >= 0.01)
+# Test the LFSR sequences with N=10000 and M=14
+lfsr_sequence = sg.getLFSRSequence_N10000_M14()
+result = []
+for sequence in lfsr_sequence:
+    p_value = discrete_fourier_transform_test(sequence)
+    result.append(p_value >= 0.01)
 
-# print("Discrete Fourier Transform test for LFSR sequences with N=10000 and M=14:")
-# print(f"Amount of passed tests: {sum(result)}")
-# print()
-
-# # Test the LFSR sequences with N=10000 and M=19
-# lfsr_sequence = sg.getLFSRSequence_N10000_M19()
-# result = []
-# for sequence in lfsr_sequence:
-#     p_value = discrete_fourier_transform_test(sequence)
-#     result.append(p_value >= 0.01)
-
-# print("Discrete Fourier Transform test for LFSR sequences with N=10000 and M=19:")
-# print(f"Amount of passed tests: {sum(result)}")
-# print()
+print("Discrete Fourier Transform test for LFSR sequences with N=10000 and M=14:")
+print(f"Amount of passed tests: {sum(result)}")
+print()
 
 # Test the LFSR sequences with N=10000 and M=29
 lfsr_sequence = sg.getLFSRSequence_N10000_M29()

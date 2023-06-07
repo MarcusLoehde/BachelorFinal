@@ -63,17 +63,6 @@ print("Runs test for LFSR sequences with N=10000 and M=14:")
 print(f"Amount of passed tests: {sum(result)}")
 print()
 
-# Test the LFSR sequences with N = 10000 and M = 19
-lfsr_sequence = sg.getLFSRSequence_N10000_M19()
-result = []
-for sequence in lfsr_sequence:
-    p_value = runs_test(sequence)
-    result.append(p_value >= 0.01)
-
-print("Runs test for LFSR sequences with N=10000 and M=19:")
-print(f"Amount of passed tests: {sum(result)}")
-print()
-
 # Test the LFSR sequences with N = 10000 and M = 29
 lfsr_sequence = sg.getLFSRSequence_N10000_M29()
 result = []
