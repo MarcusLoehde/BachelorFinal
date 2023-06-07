@@ -37,7 +37,6 @@ def true_random():
     
 
 def random_source(source):
-    #print(random_m.__next__(1))
     if source == "python":
         return random.randint(0,1)
     elif (source == "true"):
@@ -70,7 +69,8 @@ def test_maxcut_approx(num_nodes, num_edges, a, b, rand_mode):
             nodes[rand_node1].neighbors.add(rand_node2)
             nodes[rand_node2].neighbors.add(rand_node1)
             i += 1
-    
+
+    #calculate the amount of edges cut
     cut = 0
     for node in nodes:
         if node.color == 0:
@@ -124,7 +124,7 @@ def __main__():
 
     # Determine the interval around expected we see in histogram
     interval = 50
-    
+
     # Plot histogram for results
     plt.hist(result, bins=100, alpha=0.5, label='Results of MaxCut from pairwise independence', range=(num_edges/2-interval,num_edges/2+interval))
     plt.xlabel('Edges Cut')
