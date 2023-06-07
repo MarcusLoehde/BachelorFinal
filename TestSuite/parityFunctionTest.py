@@ -58,18 +58,6 @@ print(f"Amount of ones: {result}")
 print(f"Ratio:  {ratio}")
 print()
 
-# Test the LFSR sequence with N=10000 and M=19
-lfsr_sequence = sg.getLFSRSequence_N10000_M19()
-result = 0
-for sequence in lfsr_sequence:
-    result += sum(parity_function_test(sequence, 19))
-ratio = result / (len(lfsr_sequence) * 9982)
-
-print("Parity function test for LFSR sequence with N=10000 and M=19:")
-print(f"Amount of ones: {result}")
-print(f"Ratio:  {ratio}")
-print()
-
 # Test the LFSR sequence with N=10000 and M=29
 lfsr_sequence = sg.getLFSRSequence_N10000_M29()
 result = 0
