@@ -79,6 +79,23 @@ def generate_plot():
     plt.title(f"All possible outputs with a={a}, b={b}")
     plt.xlabel("Value of x")
     plt.ylabel("Output of generator")
+
+    ax = plt.gca()
+    
+    # Set the x-ticks and y-ticks
+    ax.set_xticks(np.arange(0, 257, 32)) # Change step size to suit your needs
+    ax.set_yticks(np.arange(0, 257, 32)) # Change step size to suit your needs
+
+    # Set the x-tick labels and y-tick labels
+    max_bin_length = len(bin(max(ax.get_xticks().max(), ax.get_yticks().max()))[2:])
+
+    # Generate the labels
+    x_labels = [bin(num)[2:].zfill(max_bin_length) for num in ax.get_xticks()]
+    y_labels = [bin(num)[2:].zfill(max_bin_length) for num in ax.get_yticks()]
+
+    ax.set_xticklabels(x_labels)
+    ax.set_yticklabels(y_labels)
+
     plt.show()
 
 want_to_plot = input("Do you want to plot? (y/N): ")
