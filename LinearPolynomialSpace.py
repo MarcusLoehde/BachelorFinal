@@ -52,6 +52,9 @@ bit_sequence = generate_bit_sequence(a, b, field)
 print(f"Bit sequence:\n{bit_sequence}")
 
 def generate_plot():
+    """
+    Generates a plot of the outputs by iterating x.
+    """
     # Generate a plot of the outputs by iterating x
 
     def binary_to_integer(binary_array):

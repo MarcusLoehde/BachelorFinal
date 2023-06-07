@@ -1,6 +1,8 @@
 from pyfinite import ffield
 import numpy as np
 import matplotlib.pyplot as plt
+import itertools
+from collections import Counter
 
 def generate(field : ffield.FField, n, x, y):
     """
@@ -144,9 +146,6 @@ def is_almost_k_wise_independent(n, m):
     m : int
         The length of the seeds
     """
-    import itertools
-    from collections import Counter
-
     # Let's say this is your list of 4000 binary strings
     sequences = generate_sequences_by_all_possible_seeds(n, m)
 
@@ -182,6 +181,13 @@ def is_almost_k_wise_independent(n, m):
     result = prob_difference <= eps
     print(f"Is the sequence almost {m}-wise independent? {result}")
 
+want_to_plot = input("Do you want to plot with n = 8 and m = 4? (y/N): ")
+if want_to_plot == "y":
+    generate_plot_n8_m4()
+
+want_to_plot = input("Do you want to plot with n = 12 and m = 8? (y/N): ")
+if want_to_plot == "y":
+    generate_plot_n12_m8()
 
 check_almost_kwise_independence_n8_m4 = input("Do you want to check for almost 4-wise independence with n = 8 and m = 4? (y/N): ")
 if check_almost_kwise_independence_n8_m4 == "y":
@@ -190,12 +196,4 @@ if check_almost_kwise_independence_n8_m4 == "y":
 check_almost_kwise_independence_n12_m8 = input("Do you want to check for almost 8-wise independence with n = 12 and m = 8? (y/N): ")
 if check_almost_kwise_independence_n12_m8 == "y":
     is_almost_k_wise_independent(12, 8)
-
-want_to_plot = input("Do you want to plot with n = 8 and m = 4? (y/N): ")
-if want_to_plot == "y":
-    generate_plot_n8_m4()
-
-want_to_plot = input("Do you want to plot with n = 12 and m = 8? (y/N): ")
-if want_to_plot == "y":
-    generate_plot_n12_m8()
 

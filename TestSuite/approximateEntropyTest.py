@@ -58,37 +58,65 @@ def approximate_entropy_test(sequence, m):
     return p_value
 
 # Test the modulo prime space sequences
-modulo_prime_sequence = sg.getModuloPrimeSpaceSequences()
-results = {}
-for sequence in modulo_prime_sequence:
-    for m in range(2, 8):
-        p_value = approximate_entropy_test(sequence, m)
-        if m not in results:
-            results[m] = 0
-        results[m] += (p_value >= 0.01)
+# modulo_prime_sequence = sg.getModuloPrimeSpaceSequences()
+# results = {}
+# for sequence in modulo_prime_sequence:
+#     for m in range(2, 8):
+#         p_value = approximate_entropy_test(sequence, m)
+#         if m not in results:
+#             results[m] = 0
+#         results[m] += (p_value >= 0.01)
 
-print("Approximate entropy test for modulo prime sequences:")
-for m in range(2, 8):
-    print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
-print()
+# print("Approximate entropy test for modulo prime sequences:")
+# for m in range(2, 8):
+#     print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
+# print()
 
-# Test the linear polynomial space sequences
-linear_polynomial_sequence = sg.getLinearPolynomialSpaceSequences()
-results = {}
-for sequence in linear_polynomial_sequence:
-    for m in range(2, 8):
-        p_value = approximate_entropy_test(sequence, m)
-        if m not in results:
-            results[m] = 0
-        results[m] += (p_value >= 0.01)
+# # Test the linear polynomial space sequences
+# linear_polynomial_sequence = sg.getLinearPolynomialSpaceSequences()
+# results = {}
+# for sequence in linear_polynomial_sequence:
+#     for m in range(2, 8):
+#         p_value = approximate_entropy_test(sequence, m)
+#         if m not in results:
+#             results[m] = 0
+#         results[m] += (p_value >= 0.01)
 
-print("Approximate entropy test for linear polynomial sequences:")
-for m in range(2, 8):
-    print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
-print()
+# print("Approximate entropy test for linear polynomial sequences:")
+# for m in range(2, 8):
+#     print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
+# print()
 
-# Test the LFSR sequence with N = 10000 and M = 14
-lfsr_sequence = sg.getLFSRSequence_N10000_M14()
+# # Test the LFSR sequence with N = 10000 and M = 14
+# lfsr_sequence = sg.getLFSRSequence_N10000_M14()
+# results = {}
+# for sequence in lfsr_sequence:
+#     for m in range(2, 8):
+#         p_value = approximate_entropy_test(sequence, m)
+#         if m not in results:
+#             results[m] = 0
+#         results[m] += (p_value >= 0.01)
+
+# print("Approximate entropy test for LFSR sequences with N = 10000 and M = 14:")
+# for m in range(2, 8):
+#     print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
+
+# # Test the LFSR sequence with N = 10000 and M = 19
+# lfsr_sequence = sg.getLFSRSequence_N10000_M19()
+# results = {}
+# for sequence in lfsr_sequence:
+#     for m in range(2, 8):
+#         p_value = approximate_entropy_test(sequence, m)
+#         if m not in results:
+#             results[m] = 0
+#         results[m] += (p_value >= 0.01)
+
+# print("Approximate entropy test for LFSR sequences with N = 10000 and M = 19:")
+# for m in range(2, 8):
+#     print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
+
+# Test the LFSR sequence with N = 10000 and M = 29
+lfsr_sequence = sg.getLFSRSequence_N10000_M29()
 results = {}
 for sequence in lfsr_sequence:
     for m in range(2, 8):
@@ -96,21 +124,8 @@ for sequence in lfsr_sequence:
         if m not in results:
             results[m] = 0
         results[m] += (p_value >= 0.01)
-
-print("Approximate entropy test for LFSR sequences with N = 10000 and M = 14:")
+    
+print("Approximate entropy test for LFSR sequences with N = 10000 and M = 29:")
 for m in range(2, 8):
     print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
-
-# Test the LFSR sequence with N = 10000 and M = 19
-lfsr_sequence = sg.getLFSRSequence_N10000_M19()
-results = {}
-for sequence in lfsr_sequence:
-    for m in range(2, 8):
-        p_value = approximate_entropy_test(sequence, m)
-        if m not in results:
-            results[m] = 0
-        results[m] += (p_value >= 0.01)
-
-print("Approximate entropy test for LFSR sequences with N = 10000 and M = 19:")
-for m in range(2, 8):
-    print(f"Amount of sequences that pass the test with m = {m}: {results[m]}")
+print()
