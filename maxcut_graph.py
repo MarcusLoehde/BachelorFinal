@@ -25,7 +25,6 @@ class random_modulo_prime:
 
 random_m = random_modulo_prime(8328, 3883)
 
-
 true_random_sequence = sg.getTrulyRandomBits()
 
 true_random_sequence_seeds = sg.getTrulyRandomSeed_101()
@@ -70,7 +69,7 @@ def test_maxcut_approx(num_nodes, num_edges, a, b, rand_mode):
             nodes[rand_node2].neighbors.add(rand_node1)
             i += 1
 
-    #calculate the amount of edges cut
+    # Calculate the amount of edges cut
     cut = 0
     for node in nodes:
         if node.color == 0:
@@ -105,20 +104,26 @@ def __main__():
     # Specify the number of tests
     num_tests = 1000
 
-    #Set seed so comparison is valid
+    # Set seed so comparison is valid
     random.seed(42069)
+
+    # Run test on modulo prime space generated randomness
     for i in range(num_tests):
         result.append(test_maxcut_approx(num_nodes, num_edges, get_rand_seed_101(zero=True), get_rand_seed_101(), "modulo"))
     average = sum(result)/num_tests
     print("Average with pairwise independence: ", average)
     print("Variance: ", (1/num_tests)*sum([((r-average)**2) for r in result]))
     print("------------------------------------------------")
+
+
     random.seed(42069)
     result2 = []
+
+    # Run tests on true random bits
     for i in range(num_tests):
         result2.append(test_maxcut_approx(num_nodes, num_edges, 0, 0, "true"))
     average = sum(result2)/num_tests
-    print("Average with independence: ", average)
+    print("Average with truly random bits: ", average)
     print("Variance: ", (1/num_tests)*sum([((r-average)**2) for r in result2]))
 
 
@@ -132,7 +137,6 @@ def __main__():
     plt.title('Histogram of 1000 MaxCut runs')
     plt.grid(True)
 
-    
     # Plot histogram for results2
     plt.hist(result2, bins=100, alpha=0.5, label='Results of MaxCut from true randomness', range=(num_edges/2-interval,num_edges/2+interval))
    
@@ -141,8 +145,6 @@ def __main__():
 
     # Show the plot
     plt.show()
-
-
 
 if __name__ == "__main__":
     __main__()
