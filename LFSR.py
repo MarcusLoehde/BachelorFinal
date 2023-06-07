@@ -137,50 +137,6 @@ def generate_plot_n12_m8():
 
     plt.show()
 
-def is_almost_k_wise_independent(n, m):
-    """
-    Checks if the sequences of length n is almost k-wise independent, and prints the result.
-    Args:
-    n : int
-        The length of the sequences
-    m : int
-        The length of the seeds
-    """
-    # Let's say this is your list of 4000 binary strings
-    sequences = generate_sequences_by_all_possible_seeds(n, m)
-
-    # Create a counter to hold the counts of each 8-bit number
-    counter = Counter()
-
-    # Generate all combinations of 8 indices
-    index_combinations = list(itertools.combinations(range(n), m))
-
-    # Iterate over each 12-bit binary string
-    for sequence in sequences:
-        # For each combination of indices, get the corresponding bits
-        for index_combination in index_combinations:
-            bit_combination = [sequence[i] for i in index_combination]
-            bit_combination_string = "".join(str(i) for i in bit_combination)
-
-            # Combine the index combination and bit combination into a tuple
-            combination = (index_combination, bit_combination_string)
-
-            # Increment the count for this combination
-            counter[combination] += 1
-
-    # Now we can find the combination with the highest count
-    most_common_combination = counter.most_common(1)
-    print('The combination with the highest count is:', most_common_combination)
-
-    # Check if the sequence is almost m-wise independent by calculating the probabilities
-    eps = n/(2**m)
-    prob_most_common_combination = most_common_combination[0][1]/(len(sequences))
-    prob_difference = np.abs(prob_most_common_combination - 2**(-m))
-
-    # Print the result defined by the upper bound of epsilon
-    result = prob_difference <= eps
-    print(f"Is the sequence almost {m}-wise independent? {result}")
-
 want_to_plot = input("Do you want to plot with n = 8 and m = 4? (y/N): ")
 if want_to_plot == "y":
     generate_plot_n8_m4()
@@ -188,12 +144,4 @@ if want_to_plot == "y":
 want_to_plot = input("Do you want to plot with n = 12 and m = 8? (y/N): ")
 if want_to_plot == "y":
     generate_plot_n12_m8()
-
-check_almost_kwise_independence_n8_m4 = input("Do you want to check for almost 4-wise independence with n = 8 and m = 4? (y/N): ")
-if check_almost_kwise_independence_n8_m4 == "y":
-    is_almost_k_wise_independent(8, 4)
-
-check_almost_kwise_independence_n12_m8 = input("Do you want to check for almost 8-wise independence with n = 12 and m = 8? (y/N): ")
-if check_almost_kwise_independence_n12_m8 == "y":
-    is_almost_k_wise_independent(12, 8)
 
